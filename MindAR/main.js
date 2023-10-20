@@ -1,6 +1,7 @@
 import * as THREE from './Libs/three/three.module.js';
 import WebGL from './Libs/three/addons/capabilities/WebGL.js';
 import { MindARThree } from './Libs/MindAR/mindar-image-three.prod.js';
+import { FBXLoader } from './Libs/three/addons/loaders/FBXLoader.js';
 
 //#region Main
 
@@ -37,7 +38,7 @@ var _UIContainer;
 var _FPSUI;
 
 function InitUI() {
-    // Container ::
+    // Container :
 
     _UIContainer = document.createElement("div");
 
@@ -45,7 +46,7 @@ function InitUI() {
 
     document.body.appendChild(_UIContainer);
 
-    // FPS ::
+    // FPS :
 
     _FPSUI = document.createElement("div");
 
@@ -61,12 +62,14 @@ function UpdateUI() {
 
 //#endregion
 
-//#region MindAR
+//#region AR
 
 var _Scene, _Camera, _Renderer;
 var _Anchor0;
 
-const _TargetURL = "Assets/Target_Fu.mind";
+const _TargetURL = "Assets/targets_card.mind";
+
+const _FBXLoader = new FBXLoader();
 
 async function InitMindAR() {
     var _MindAR = new MindARThree({
@@ -84,15 +87,34 @@ async function InitMindAR() {
 }
 
 function InitScene() {
-    const _BoxGeometry = new THREE.BoxGeometry(1, 1, 1);
-    const _BoxMaterial = new THREE.MeshBasicMaterial({
-        color: "white",
-        transparent: true,
-        opacity: 0.5
-    });
-    const _Box = new THREE.Mesh(_BoxGeometry, _BoxMaterial);
+    // Box :
 
-    _Anchor0.group.add(_Box);
+    // const _BoxGeometry = new THREE.BoxGeometry(1, 1, 1);
+    // const _BoxMaterial = new THREE.MeshBasicMaterial({
+    //     color: "white",
+    //     transparent: true,
+    //     opacity: 0.5
+    // });
+    // const _Box = new THREE.Mesh(_BoxGeometry, _BoxMaterial);
+    
+    // _Anchor0.group.add(_Box);
+
+    // FBX :
+    _FBXLoader.load(
+        "Assets/Cactus.fbx",
+        (_Model) =>
+        {
+            console.log(_Model);
+            _Model.position.set(0, 0, 0);
+            _Model.scale.set(0.01, 0.01, 0.01);
+            _Anchor0.group.add(_Model);
+        });
+
+    // Lights :
+    const _Light = new THREE.AmbientLight("white", 0.5);
+    _Anchor0.group.add(_Light);
+
+    // Button : To DAYOU website.
 }
 
 function Render() {
