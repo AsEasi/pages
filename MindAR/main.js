@@ -17,13 +17,13 @@ window.onload = () => {
 
 function Init() {
     InitMindAR();
-    // InitScene();
+    InitScene();
     InitUI();
 };
 
 function Animate() {
     requestAnimationFrame(Animate);
-    // Render();
+    Render();
     UpdateUI();
 };
 
@@ -78,7 +78,7 @@ async function InitMindAR() {
     _Camera = _MindAR.camera;
     _Renderer = _MindAR.renderer;
 
-    // _Anchor0 = _MindAR.addAnchor(0);
+    _Anchor0 = _MindAR.addAnchor(0);
 
     await _MindAR.start();
 }
