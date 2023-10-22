@@ -3,7 +3,7 @@
 <html>
 
     <head>
-        <title>AR CARD</title>
+        <title>Argumented Realities</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="importmap">
             {
@@ -17,9 +17,12 @@
         <!-- <script async src="https://unpkg.com/es-module-shims@1.7.3/dist/es-module-shims.js"></script> -->
         <script src="main.js" type="module"></script>
         <style>
-            body
+            html
             {
                 background-color: black;
+            }
+            body
+            {
                 margin: 0; 
             }
             #MindAR-Container
@@ -29,12 +32,81 @@
                 position: absolute;
                 overflow: hidden;
             }
+            #OverlayUI-Container
+            {
+                z-index: 1000;
+                width: 100vw;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                position: absolute;
+                overflow: hidden;
+                display: contents;
+            }
+            #SelectionButtons 
+            {
+                display: grid;
+                align-items: center;
+                align-content: center;
+                position: absolute;
+                justify-content: space-around;
+                width: 100vw;
+                height: 100vh;
+            }
+            .SelectionButton
+            {
+                width: 20vh;
+                height: 20vh;
+                margin-top: 5vh;
+                /* margin-bottom: 5vh; */
+            }
+            img
+            {
+                max-width: 100%;
+                height: auto;
+            }
         </style>
     </head>
 
     <body>
         <div id="WebGL-Container"></div>
         <div id="MindAR-Container"></div>
+        <div id="OverlayUI-Container">
+            <div id="SelectionButtons">
+
+                <div style="
+                    color: white;
+                    position: absolute;
+                    text-align: center;
+                    width: 100vw;
+                    top: 10vh;
+                    font-size: 150%;">
+                    WELCOME TO AR WORLD
+                </div>
+
+                <button class="SelectionButton" id="Button:Chicken">
+                    <img src="Assets/ModelCraftingImages/Chicken.jpg" alt="Chicken Image">
+                </button>
+
+                <button class="SelectionButton" id="Button:Cherry">
+                    <img src="Assets/ModelCraftingImages/Cherry.jpg" alt="Cherry Image">
+                </button>
+
+                <button class="SelectionButton" id="Button:Cactus">
+                    <img src="Assets/ModelCraftingImages/Cactus.jpg" alt="Cactus Image">
+                </button>
+
+            </div>
+        </div>
+        <div style="
+            position: absolute;
+            top: 100vh;
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+            justify-content: center;">
+            <img src="Assets/House.jpg">
+        </div>
     </body>
 
 </html>
