@@ -21,7 +21,7 @@ function Init() {
     // InitScene();
     InitUI();
 };
-
+ 
 function Animate() {
     requestAnimationFrame(Animate);
     Render();
@@ -58,13 +58,8 @@ function InitUI() {
     document.getElementById("Button:Cactus").onclick = CactusSelected;
 }
 
-function SetSelectionButtonsVisible(_Visible = true) {
-    if (_Visible) {
-        _ButtonContainer.style.visibility = "visible";
-    }
-    else {
-        _ButtonContainer.style.visibility = "hidden";
-    }
+function SetSelectionButtonsVisible(_Visible) {
+    _ButtonContainer.style.visibility = _Visible ? "visible" : "hidden";
 }
 
 function UpdateUI() {
@@ -87,11 +82,16 @@ const _FBXLoader = new FBXLoader();
 
 var _TargetModelName = "None";
 
+var _MindAR;
+
 async function InitMindAR() {
-    var _MindAR = new MindARThree({
+    _MindAR = new MindARThree({
         container: _MindARContainer,
         imageTargetSrc: _TargetURL
     });
+
+    _MindAR.filterMinCF = 0.000000000001;
+    _MindAR.filterBeta = 1;
 
     _Scene = _MindAR.scene;
     _Camera = _MindAR.camera;
